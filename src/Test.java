@@ -37,7 +37,10 @@ public class Test {
         Test test=new Test();
         test.input();
         Graph graph=new Graph(test.arr,test.num,test.edges);
-        PriorityQueue queue=graph.setGraph();
-        System.out.println("QUEUE:");
+        PriorityQueue<Vertex> queue=graph.setGraph();
+        String arr[]=graph.calculateBFS(queue,"A");
+        for(String e:arr){
+            System.out.println(e);
+        }
     }
 }

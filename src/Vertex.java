@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
     /**
      * The Name of the Vertex.
      */
@@ -25,5 +25,11 @@ public class Vertex {
      */
     public Vertex(String name){
         this.name=name;
+        connectedEdges=new HashMap<>();
+    }
+
+    @Override
+    public int compareTo(Vertex o) {
+        return o.name.compareTo(this.name);
     }
 }
