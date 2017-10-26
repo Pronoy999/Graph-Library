@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class Graph {
-    int graph[][],numberOfEdges;
-    String edges[];
-    PriorityQueue<Vertex> graphQueue;
-    ArrayList<Vertex> vertices=new ArrayList<>();
+    private int graph[][],numberOfEdges;
+    private String edges[];
+    private PriorityQueue<Vertex> graphQueue;
+    private ArrayList<Vertex> vertices=new ArrayList<>();
     public Graph(int graph[][],int numberOfEdges,String edges[]){
         this.numberOfEdges=numberOfEdges;
         this.graph=graph;
