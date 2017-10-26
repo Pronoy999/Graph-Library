@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Graph {
+class Graph {
     private int graph[][],numberOfEdges;
     private String edges[];
     /**

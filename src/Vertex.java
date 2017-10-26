@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Vertex implements Comparable<Vertex> {
+class Vertex implements Comparable<Vertex> {
     /**
      * The Name of the Vertex.
      */

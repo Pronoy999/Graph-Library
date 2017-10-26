@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
  * The class for the Queue.
  * @param <T>: The data of the queue.
  */
-public class SupportQueue<T> {
+class SupportQueue<T> {
     private static class QueueNode<T>{
         private T data;
         private QueueNode<T> next;
