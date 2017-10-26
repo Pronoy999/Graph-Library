@@ -3,8 +3,21 @@ import java.util.*;
 public class Graph {
     private int graph[][],numberOfEdges;
     private String edges[];
+    /**
+     * The Priority queue to store the graph.
+     */
     private PriorityQueue<Vertex> graphQueue;
+    /**
+     * The List of the Vertex of the graph.
+     */
     private ArrayList<Vertex> vertices=new ArrayList<>();
+
+    /**
+     * The Parameterized constructor of the class.
+     * @param graph: The Adjacency Matrix of the graph.
+     * @param numberOfEdges: The total number of edges of the graph.
+     * @param edges: The name of the edges of the graph.
+     */
     public Graph(int graph[][],int numberOfEdges,String edges[]){
         this.numberOfEdges=numberOfEdges;
         this.graph=graph;
@@ -28,9 +41,15 @@ public class Graph {
             graphQueue.add(v);
         }
     }
-    private Vertex getVertex(String name){
+
+    /**
+     * Method to get the Vertex Object with the name.
+     * @param VertexName: The name of the vertex in string whose object is required.
+     * @return The Vertex object of the vertex name.
+     */
+    private Vertex getVertex(String VertexName){
         for(Vertex vertex:vertices){
-            if(vertex.name.equals(name))
+            if(vertex.name.equals(VertexName))
                 return vertex;
         }
         return null;
@@ -39,6 +58,11 @@ public class Graph {
         createVertexList();
         return graphQueue;
     }
+
+    /**
+     * @param vertexName: The Name of the Vertex whose index is required.
+     * @return The Index of the Vertex from the list of the vertices.
+     */
     private int getIndex(String vertexName){
         int i,l=edges.length;
         for(i=0;i<l;i++){
@@ -47,11 +71,19 @@ public class Graph {
         }
         return -1;
     }
-    public String[] calculateBFS(PriorityQueue<Vertex> graphQueue,String sourceVertex){
+    String[] calculateBFS(PriorityQueue<Vertex> graphQueue,String sourceVertex){
         return getBFS(graphQueue,getVertex(sourceVertex));
     }
+
+    /**
+     * Method to calculate the Breadth First Search Algorithm.
+     * @param graphQueue: The Graph.
+     * @param sourceVertex: The starting vertex.
+     * @return List of the Vertex visited.
+     */
     private String[] getBFS(PriorityQueue<Vertex> graphQueue,Vertex sourceVertex){
-        char WHITE='W',GREY='G',BLACK='B';int pos=0;
+        char WHITE='W',GREY='G',BLACK='B';
+        int pos=0;
         String visitedVertex[]=new String[numberOfEdges];
         char color[]=new char[numberOfEdges];
         for(Vertex v :graphQueue){

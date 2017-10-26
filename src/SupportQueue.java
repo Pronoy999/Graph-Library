@@ -1,5 +1,9 @@
 import java.util.NoSuchElementException;
 
+/**
+ * The class for the Queue.
+ * @param <T>: The data of the queue.
+ */
 public class SupportQueue<T> {
     private static class QueueNode<T>{
         private T data;
@@ -10,7 +14,12 @@ public class SupportQueue<T> {
     }
     private QueueNode<T> first;
     private QueueNode<T> last;
-    public void add(T item){
+
+    /**
+     * The Method to add element to the queue.
+     * @param item: The element to be added to the end of the queue.
+     */
+    void add(T item){
         QueueNode<T> node=new QueueNode<>(item);
         if(last!=null){
             last.next=node;
@@ -19,7 +28,12 @@ public class SupportQueue<T> {
         if(first==null)
             first=last;
     }
-    public T remove(){
+
+    /**
+     * The Method to remove the first element from the queue.
+     * @return item: The first element of the queue.
+     */
+    T remove(){
         if(first==null) throw new NoSuchElementException();
         T data=first.data;
         first=first.next;
@@ -28,11 +42,21 @@ public class SupportQueue<T> {
         }
         return data;
     }
+
+    /**
+     * The Method to check the front of the queue.
+     * @return item: The first element of the queue.
+     */
     public T peek(){
         if(first==null)throw new NoSuchElementException();
         return first.data;
     }
-    public boolean isEmpty(){
+
+    /**
+     * Method to check whether the queue is empty or not.
+     * @return true: if the Queue is empty, else it will return false.
+     */
+    boolean isEmpty(){
         return first==null;
     }
 }
