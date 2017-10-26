@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Test {
     int arr[][],num;
     String edges[];
+    String startingVertex;
     public void input(){
         Scanner scanner=new Scanner(System.in);
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
@@ -29,18 +30,26 @@ public class Test {
                     System.out.println("Enter the value from "+edges[i]+" to "+edges[j]);
                     arr[i][j]=scanner.nextInt();
                 }
-                else arr[i][j]=-1;
+                else arr[i][j]=0;
             }
         }
+        System.out.println("Enter the Starting Vertex:");
+        try{startingVertex=br.readLine();}
+        catch (IOException ignored){}
     }
     public static void main(String a[]){
         Test test=new Test();
         test.input();
         Graph graph=new Graph(test.arr,test.num,test.edges);
         PriorityQueue<Vertex> queue=graph.setGraph();
-        String arr[]=graph.calculateBFS(queue,"A");
+        String arr[]=graph.calculateBFS(queue,test.startingVertex);
+        System.out.println("The visited Vertex are: ");
         for(String e:arr){
-            System.out.println(e);
+            if(!e.equals(""))System.out.println(e);
+        }
+        System.out.println("The Distance of Each Vertex: ");
+        for(int i=0;i<graph.distance.length;i++){
+            System.out.println(test.edges[i]+" : "+graph.distance[i]);
         }
     }
 }
