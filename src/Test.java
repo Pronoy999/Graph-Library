@@ -33,16 +33,17 @@ public class Test {
                 else arr[i][j]=0;
             }
         }
-        System.out.println("Enter the Starting Vertex:");
+        /*System.out.println("Enter the Starting Vertex:");
         try{startingVertex=br.readLine();}
-        catch (IOException ignored){}
+        catch (IOException ignored){}*/
     }
     public static void main(String a[]){
         Test test=new Test();
         test.input();
         Graph graph=new Graph(test.arr,test.num,test.edges);
         PriorityQueue<Vertex> queue=graph.setGraph();
-        String arr[]=graph.calculateBFS(queue,test.startingVertex);
+        //String arr[]=graph.calculateBFS(queue,test.startingVertex);
+        String arr[]=graph.calculateDFS(queue);
         System.out.println("The visited Vertex are: ");
         for(String e:arr){
             if(!e.equals(""))System.out.println(e);

@@ -7,6 +7,8 @@ class Graph {
      * The Array to Store the distance of individual vertex from the source.
      */
     int distance[];
+    private int currentDistance;
+    private int pos;
     /**
      * The Priority queue to store the graph.
      */
@@ -15,6 +17,9 @@ class Graph {
      * The List of the Vertex of the graph.
      */
     private ArrayList<Vertex> vertices=new ArrayList<>();
+    private char WHITE='W',GREY='G',BLACK='B';
+    private String visitedVertex[];
+    private char color[];
 
     /**
      * The Parameterized constructor of the class.
@@ -28,6 +33,8 @@ class Graph {
         this.edges=edges;
         graphQueue=new PriorityQueue<>(numberOfEdges);
         distance=new int[numberOfEdges];
+        color=new char[numberOfEdges];
+        visitedVertex=new String[numberOfEdges];
     }
     private void createVertexList(){
         int i;
@@ -94,10 +101,7 @@ class Graph {
      * @return List of the Vertex visited.
      */
     private String[] getBFS(PriorityQueue<Vertex> graphQueue,Vertex sourceVertex){
-        char WHITE='W',GREY='G',BLACK='B';
         int pos=0;
-        String visitedVertex[]=new String[numberOfEdges];
-        char color[]=new char[numberOfEdges];
         for(Vertex v :graphQueue){
             color[getIndex(v.name)]=WHITE;
         }
@@ -122,5 +126,51 @@ class Graph {
         }
         catch (NoSuchElementException ignored){}
         return visitedVertex;
+    }
+
+    /**
+     * The Method to calculate the DFS of the graph.
+     * @param graphQueue: The graph whose DFS is to be calculated.
+     * @return The list of the vertices visited in order.
+     */
+    String[] calculateDFS(PriorityQueue<Vertex> graphQueue){
+        return getDFS(graphQueue);
+    }
+
+    /**
+     * Method calculating the DFS.
+     * @param graphQueue: The Graph whose DFS is to be calculated.
+     * @return The list of vertex visited.
+     */
+    private String[] getDFS(PriorityQueue<Vertex> graphQueue){
+        pos=0;
+        for(Vertex v:graphQueue){
+            color[getIndex(v.name)]=WHITE;
+        }
+        currentDistance=0;
+        for(Vertex vertex:graphQueue){
+            if(color[getIndex(vertex.name)]==WHITE){
+                DfsVisit(vertex);
+            }
+        }
+        return visitedVertex;
+    }
+
+    /**
+     * Method visiting the adjacent vertex.
+     * @param vertex: The Vertex whose adjacent vertex are to be visited.
+     */
+    private void DfsVisit(Vertex vertex){
+        color[getIndex(vertex.name)]=GREY;
+        currentDistance+=1;
+        distance[getIndex(vertex.name)]=currentDistance;
+        for(HashMap.Entry<Vertex,Integer> map:vertex.connectedEdges.entrySet()){
+            if(color[getIndex(map.getKey().name)]==WHITE){
+                DfsVisit(map.getKey());
+            }
+        }
+        color[getIndex(vertex.name)]=BLACK;
+        visitedVertex[pos++]=vertex.name;
+        distance[getIndex(vertex.name)]=currentDistance+=1;
     }
 }
