@@ -98,7 +98,7 @@ class Graph {
      * Method to calculate the Breadth First Search Algorithm.
      * @param graphQueue: The Graph.
      * @param sourceVertex: The starting vertex.
-     * @return List of the Vertex visited.
+     * @return List of the Vertex visited in string.
      */
     private String[] getBFS(PriorityQueue<Vertex> graphQueue,Vertex sourceVertex){
         int pos=0;
