@@ -17,6 +17,10 @@ class Graph {
      * The List of the Vertex of the graph.
      */
     private ArrayList<Vertex> vertices=new ArrayList<>();
+    /**
+     * The List to store all the edges of the graph.
+     */
+    private ArrayList<Edge> edgeList=new ArrayList<>();
     private char WHITE='W',GREY='G',BLACK='B';
     private String visitedVertex[];
     private char color[];
@@ -66,8 +70,9 @@ class Graph {
         }
         return null;
     }
-    public PriorityQueue<Vertex> setGraph(){
+    PriorityQueue<Vertex> setGraph(){
         createVertexList();
+        makeEdges();
         return graphQueue;
     }
 
@@ -98,7 +103,7 @@ class Graph {
      * Method to calculate the Breadth First Search Algorithm.
      * @param graphQueue: The Graph.
      * @param sourceVertex: The starting vertex.
-     * @return List of the Vertex visited.
+     * @return List of the Vertex visited in string.
      */
     private String[] getBFS(PriorityQueue<Vertex> graphQueue,Vertex sourceVertex){
         int pos=0;
@@ -172,5 +177,20 @@ class Graph {
         color[getIndex(vertex.name)]=BLACK;
         visitedVertex[pos++]=vertex.name;
         distance[getIndex(vertex.name)]=currentDistance+=1;
+    }
+
+    /**
+     * Method to make the edges of the graph and store them sorted in ascending order.
+     */
+    private void makeEdges(){
+        int i,j;
+        for(i=0;i<numberOfEdges;i++){
+            for(j=0;j<numberOfEdges;j++){
+                if(graph[i][j]!=0){
+                    edgeList.add(new Edge(edges[i],edges[j],graph[i][j]));
+                }
+            }
+        }
+        edgeList.sort(Edge::compareTo);
     }
 }
