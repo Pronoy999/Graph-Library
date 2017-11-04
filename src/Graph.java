@@ -100,7 +100,6 @@ class Graph {
     }
 
     /**
-     * Test
      * Method to calculate the Breadth First Search Algorithm.
      * @param graphQueue: The Graph.
      * @param sourceVertex: The starting vertex.
@@ -193,6 +192,5 @@ class Graph {
             }
         }
         Collections.sort(edgeList);
-        //making changes
     }
 }
