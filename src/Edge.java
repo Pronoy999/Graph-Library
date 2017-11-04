@@ -1,5 +1,3 @@
-import java.util.Comparator;
-
 public class Edge implements Comparable<Edge>{
     String vertex1,vertex2;
     int weight;
@@ -11,6 +9,7 @@ public class Edge implements Comparable<Edge>{
 
     @Override
     public int compareTo(Edge o) {
+        System.out.println("YES!");
         if(weight>o.weight)
             return 1;
         else if(weight<o.weight)

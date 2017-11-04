@@ -191,6 +191,6 @@ class Graph {
                 }
             }
         }
-        edgeList.sort(new CustomComparator());
+        Collections.sort(edgeList);
     }
 }
