@@ -180,6 +180,7 @@ class Graph {
     }
 
     /**
+     * lol
      * Method to make the edges of the graph and store them sorted in ascending order.
      */
     private void makeEdges(){
