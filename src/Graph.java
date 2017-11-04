@@ -191,6 +191,6 @@ class Graph {
                 }
             }
         }
-        edgeList.sort(Edge::compareTo);
+        edgeList.sort(new CustomComparator());
     }
 }
