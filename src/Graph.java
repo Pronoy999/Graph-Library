@@ -1,3 +1,5 @@
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
+
 import java.util.*;
 
 class Graph {
@@ -187,9 +189,10 @@ class Graph {
         for(i=0;i<numberOfEdges;i++){
             for(j=0;j<numberOfEdges;j++){
                 if(graph[i][j]!=0){
-                    Edge e=new Edge(edges[i],edges[j],graph[i][j]);
-                    if(!isPresent(edgeList,e))
+                    Edge e=new Edge(getVertex(edges[i]),getVertex(edges[j]),graph[i][j]);
+                    if(!isPresent(edgeList,e)){
                         edgeList.add(e);
+                    }
                 }
             }
         }
@@ -204,9 +207,9 @@ class Graph {
      */
     private boolean isPresent(ArrayList<Edge> list,Edge edge){
         for (Edge e:list){
-            if((e.vertex1.equals(edge.vertex1) && (e.vertex2.equals(edge.vertex2))))
+            if((e.vertex1.name.equals(edge.vertex1.name) && (e.vertex2.name.equals(edge.vertex2.name))))
                 return true;
-            else if((e.vertex2.equals(edge.vertex1)) && (e.vertex1.equals(edge.vertex2)))
+            else if((e.vertex2.name.equals(edge.vertex1.name)) && (e.vertex1.name.equals(edge.vertex2.name)))
                 return true;
         }
         return false;
@@ -220,16 +223,25 @@ class Graph {
     ArrayList<Edge> MST_Krushkal(ArrayList<Edge> edgeList){
         ArrayList<Edge> edgesVisited=new ArrayList<>();
         for(Edge e:edgeList){
-            if(!doesContain(edgesVisited,e.vertex1) || !doesContain(edgesVisited,e.vertex2)){
+            if(!isCyclic(e)){
                 edgesVisited.add(e);
             }
         }
         return edgesVisited;
     }
-    private boolean doesContain(ArrayList<Edge> edgeList,String vertexName){
+    /*private boolean doesContain(ArrayList<Edge> edgeList,String vertexName){
         for(Edge edge:edgeList){
             if(edge.vertex1.equals(vertexName) || edge.vertex2.equals(vertexName))
                 return true;
+        }
+        return false;
+    }*/
+    private boolean isCyclic(Edge edge){
+        for(Map.Entry<Vertex,Integer> map:edge.vertex1.connectedEdges.entrySet()){
+            for(Map.Entry<Vertex,Integer> map1:map.getKey().connectedEdges.entrySet()){
+                if(map.getKey().name.equals(edge.vertex2.name))
+                    return true;
+            }
         }
         return false;
     }

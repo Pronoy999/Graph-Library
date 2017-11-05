@@ -32,4 +32,5 @@ class Vertex implements Comparable<Vertex> {
     public int compareTo(Vertex o) {
         return o.name.compareTo(this.name);
     }
+
 }
