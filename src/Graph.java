@@ -20,7 +20,7 @@ class Graph {
     /**
      * The List to store all the edges of the graph.
      */
-    private ArrayList<Edge> edgeList=new ArrayList<>();
+    ArrayList<Edge> edgeList=new ArrayList<>();
     private char WHITE='W',GREY='G',BLACK='B';
     private String visitedVertex[];
     private char color[];
@@ -180,7 +180,6 @@ class Graph {
     }
 
     /**
-     * lol
      * Method to make the edges of the graph and store them sorted in ascending order.
      */
     private void makeEdges(){
@@ -188,11 +187,50 @@ class Graph {
         for(i=0;i<numberOfEdges;i++){
             for(j=0;j<numberOfEdges;j++){
                 if(graph[i][j]!=0){
-                    edgeList.add(new Edge(edges[i],edges[j],graph[i][j]));
+                    Edge e=new Edge(edges[i],edges[j],graph[i][j]);
+                    if(!isPresent(edgeList,e))
+                        edgeList.add(e);
                 }
             }
         }
         Collections.sort(edgeList);
-        //making changes
+    }
+
+    /**
+     * Method to check whether the edge is present in a particular list.
+     * @param list: The List of edges where it is to be checked.
+     * @param edge: The Edges which is being searched.
+     * @return True if the edge is present in the list else false.
+     */
+    private boolean isPresent(ArrayList<Edge> list,Edge edge){
+        for (Edge e:list){
+            if((e.vertex1.equals(edge.vertex1) && (e.vertex2.equals(edge.vertex2))))
+                return true;
+            else if((e.vertex2.equals(edge.vertex1)) && (e.vertex1.equals(edge.vertex2)))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Method to get the List of the edges visited in Kruskal's algorithm for MST.
+     * @param edgeList: The List of the edges of the graph.
+     * @return The List of the edges visited.
+     */
+    ArrayList<Edge> MST_Krushkal(ArrayList<Edge> edgeList){
+        ArrayList<Edge> edgesVisited=new ArrayList<>();
+        for(Edge e:edgeList){
+            if(!doesContain(edgesVisited,e.vertex1) || !doesContain(edgesVisited,e.vertex2)){
+                edgesVisited.add(e);
+            }
+        }
+        return edgesVisited;
+    }
+    private boolean doesContain(ArrayList<Edge> edgeList,String vertexName){
+        for(Edge edge:edgeList){
+            if(edge.vertex1.equals(vertexName) || edge.vertex2.equals(vertexName))
+                return true;
+        }
+        return false;
     }
 }
