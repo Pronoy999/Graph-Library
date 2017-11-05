@@ -6,7 +6,6 @@ public class Edge implements Comparable<Edge>{
         this.vertex2=vertex2;
         this.weight=weight;
     }
-
     @Override
     public int compareTo(Edge o) {
         if(weight>o.weight)
